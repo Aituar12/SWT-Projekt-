@@ -1,0 +1,58 @@
+= Protocol Group 13
+
+Meeting on 20.11.2023
+
+Place:   SLUB Room 042 +
+Start:   08:30 Uhr +
+(Planned on starting 8:30 real start at 8:40)
+End:     09:00 Uhr
+
+__Protocol writer:__ Celina Stransky
+
+*Next Meeting:* +
+27.11.2023, 8:15
+
+__Participants:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- *Meera* (Tutor, Customer, late)
+
+- Bastian (SCRUM Master, late)
+- Celina
+- Kevin
+- Antonia (late)
+- Adrian (late)
+- Florian (late)
+- Aituar (late)
+
+not present: Oliver
+
+== Notes
+
+* Meera says DevDoc looks fine
+
+* Present Meera with our progress from last week
+** TransactionEntries are now permanently stored in the Database
+** TransactionEntry Attribute amount is javaxMoney and can't be saved in the Database, so we will emit that, and only work with a double, so every transactions is assumed to be in EURO
+** Florian and Basti talked about fixing some issues with the reservation
+*** Booking with several dates + several rooms, or only one room with one date per reservation?
+*** Meera decided: we can do it any way
+*** Basti : multiple rooms per booking, but different dates need multiple reservation
+* Test Coverage :
+** https://st-lab-ci.inf.tu-dresden.de/sonarqube/component_measures?id=de.tudresden.inf.st.lab%3Aswt23w13&metric=new_coverage&view=list
+* Cross testing can be done in the holidays, if we are not able to finish it before the holidays
+
+== Current
+
+* Only DevDoc is to be updated, Pflichtenheft shall not be updated
+* Task distribution is done via Trello:
+** https://trello.com/b/8H2GYu28/swp
+
+
+== Planning of the next Sprints
+
+* update DevDoc while implementing
+* implementation of mandatory functionality
+* implementation of unittests
+
+

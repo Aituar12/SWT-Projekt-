@@ -1,0 +1,56 @@
+= Protocol Group 13
+
+Meeting on 13.11.2023
+
+Place:   SLUB Room 042 +
+Start:   08:15 Uhr +
+End:     09:00 Uhr
+
+__Protocol writer:__ Celina Stransky
+
+*Next Meeting:* +
+16.11.2023 16:40 for the mid presentation
+
+__Participants:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- *Meera* (late)
+
+- Bastian (SCRUM Master)
+- Celina
+- Antonia
+- Kevin
+- Adrian
+- Oliver(late)
+- Florian(online)
+
+not present: Aituar(sick), 
+
+== Notes
+
+* problems with the DevDoc : Adrian pushed sunday 23:57, and pushed the wrong stuff
+* for the prensentation everyone has to be present
+* sonarcube: coverage is less than 30% -> should be fixed until the end of project (at least 60%)
+** https://st-lab-ci.inf.tu-dresden.de/sonarqube/projects (to see what is a problem)
+* DevDocs shall be updated regularily, if we decide to change implementation details
+* Problems: User must have credit info (is ca. 1700 byte) but database only accepts data up until 256 byte
+** Meera says we can use a dummy for the credit card -> not use salespoint
+
+
+== Current
+
+* Date for the middle prensentation: 16.11.2023
+* Pairs for the implementation:
+** Antonia & Celina
+** Kevin & Florian
+** Adrian & Oliver
+** Bastian & Aituar
+* Task distribution is done via Trello:
+** https://trello.com/b/8H2GYu28/swp
+
+
+== Planning of the next Sprints
+
+* everyone starts their implementation
+* presentation of our prototype on thursday, 16.11.2023
+

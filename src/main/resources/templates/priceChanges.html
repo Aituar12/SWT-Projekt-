@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/resources/css/style.css">
+    <title>Price Changes</title>
+</head>
+
+<body>
+<header>
+</header>
+<section layout:fragment="content">
+    <h1>Price and Equipment Updates</h1>
+    <h2>Price Updates Rooms</h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Current Value</th>
+            <th>New Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> Price per Square Metre</td>
+            <td th:text="${QMPrice}"> 666€</td>
+            <td>
+                <form class="ui form input" role="form" method="post" th:action="@{/management/updateQMPrice}">
+                    <label for="QMPrice"></label>
+                    <input type="number"
+                           id="QMPrice"
+                           name="QMPrice"
+                           placeholder="new price"
+                           step="any"
+                           pattern="\d+(\.\d{1,2})?"
+                           required>
+                    <button type="submit" class="ui circular button input__button"><i class="fa fa-arrow-right"
+                                                                                      aria-hidden="true"></i></button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td> Price per Bed</td>
+            <td th:text="${BedPrice}"> 666€</td>
+            <td>
+                <form class="ui form input" role="form" method="post" th:action="@{/management/updateBedPrice}">
+                    <label for="BedPrice"></label>
+                    <input type="number"
+                           id="BedPrice"
+                           name="BedPrice"
+                           placeholder="new price"
+                           step="any"
+                           pattern="\d+(\.\d{1,2})?"
+                           required>
+                    <button type="submit" class="ui circular button input__button"><i class="fa fa-arrow-right"
+                                                                                      aria-hidden="true"></i></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Price Updates Equipment</h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Current Value</th>
+            <th>New Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${equipmentItems}">
+            <td th:text="${item.getName()}"></td>
+            <td th:text="${item.getValue()}"></td>
+            <td>
+                <form class="ui form input" role="form" method="post" th:action="@{/management/updateItem}">
+                    <label for="newPrice" class="sr-only">New Price</label>
+                    <input type="hidden" name="id" th:value="${item.id}">
+                    <input type="number"
+                           name="newPrice"
+                           id="newPrice"
+                           placeholder="New Price"
+                           required>
+                    <button type="submit" class="ui circular button input__button"><i class="fa fa-arrow-right"
+                                                                                      aria-hidden="true"></i></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Adding new Equipment</h2>
+
+    <!-- Check for the presence of the "error" flash attribute -->
+    <div th:if="${errorRooms}">
+        <p th:text="${errorRooms}">Error</p>
+    </div>
+
+    <div th:if="${errorItem}">
+        <p th:text="${errorItem}">Error</p>
+    </div>
+
+    <!-- Check for the presence of the "success" flash attribute -->
+    <div th:if="${success}">
+        <p th:text="${success}"> Success </p>
+    </div>
+
+    <form class="ui form" role="form" method="post" th:action="@{/management/addInventory}">
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th>New Equipment Name</th>
+                <th>New Equipment Price</th>
+                <th>Add to rooms</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <!-- This is the name input -->
+                    <label for="name"></label>
+                    <input type="text"
+                           name="name"
+                           id="name"
+                           placeholder="New Equipment name"
+                           required>
+                </td>
+                <td>
+                    <!-- This is the price input -->
+                    <label for="price"></label>
+                    <input type="number"
+                           name="price"
+                           id="price"
+                           placeholder="New Equipment price"
+                           required>
+                </td>
+                <td>
+                    <!-- Display room names and create checkboxes -->
+                    <div th:each="room: ${catalog}">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="rooms" th:value="${room.getId()}" id="${room.getId()}">
+                            <label th:for="${room.getId()}" th:text="${room.getName()}"></label>
+                        </div>
+                    </div>
+                    <button type="submit" class="ui circular button input__button"><i class="fa fa-arrow-right"
+                                                                                      aria-hidden="true"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+
+    <h2>Room Equipment</h2>
+
+    <div th:if="${errorAdding}">
+        <p th:text="${errorAdding}">Error</p>
+    </div>
+
+    <div th:if="${errorRemoving}">
+        <p th:text="${errorRemoving}">Error</p>
+    </div>
+
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Current Equipment</th>
+            <th>Add Equipment</th>
+            <th>Remove Equipment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="room : ${catalog}">
+            <td th:text="${room.getName}"></td>
+            <td th:text="${room.getEquipment}"></td>
+            <td>
+                <form class="ui form" role="form" method="post" th:action="@{/management/addItem}">
+                    <div th:each="item: ${roomChanges.ItemNotInRoom(room.getId())}">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="items" th:value="${item.getId()}">
+                            <label th:for="${item.getId()}" th:text="${item.getName()}"></label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="room" th:value="${room.getId()}">
+                    <button type="submit" class="ui circular button"><i class="fa fa-arrow-right"
+                                                                        aria-hidden="true"></i></button>
+                </form>
+            </td>
+            <td>
+                <form class="ui form" role="form" method="post" th:action="@{/management/removeItem}">
+                    <div th:each="item: ${room.getEquipment()}">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="items" th:value="${item.getId()}">
+                            <label th:for="${item.getId()}" th:text="${item.getName()}"></label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="room" th:value="${room.getId()}">
+                    <button type="submit" class="ui circular button"><i class="fa fa-arrow-right"
+                                                                        aria-hidden="true"></i></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+
+</body>
+</html>

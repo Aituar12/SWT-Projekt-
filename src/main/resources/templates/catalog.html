@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">>
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogue</title>
+</head>
+<body>
+<header>
+</header>
+<nav>
+</nav>
+<section layout:fragment="content">
+
+    <div class="section-container">
+
+        <aside>
+            <form method="post" th:action="@{/filterCatalog}">
+                <table class="ui basic table">
+                    <thead>
+                    <tr>
+                        <th>Filter</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <!-- start date input -->
+                            <label for="startDate">From:</label>
+                            <input type="date" name="startDate" id="startDate" th:value="${startDate}">
+                            <span>Current start date: </span>
+                            <span th:text="${startDate}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- end date input -->
+                            <label for="endDate">To:</label>
+                            <input type="date" name="endDate" id="endDate" th:value="${endDate}">
+                            <span>Current end date: </span>
+                            <span th:text="${endDate}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- person input -->
+                            <label for="personCount">Number of Persons: </label>
+                            <input type="number"
+                                name="personCount"
+                                id="personCount"
+                                placeholder="number of persons"
+                                step="1"
+                                th:value="${personCount}"
+                                pattern="[0-9]*">
+                            <span>Current persons: </span>
+                            <span th:text="${currentPersonCount}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- board type input -->
+                            <label for="boardType">Board Type: </label><br>
+                                <input type="radio" name="boardType" id="boardType" th:value="BREAKFAST" checked> Breakfast<br>
+                                <input type="radio" name="boardType" id="boardType" th:value="HALFBOARD"> Half Board<br>
+                                <input type="radio" name="boardType" id="boardType" th:value="FULLBOARD"> Full Board<br>
+                            <span>Current Board Type: </span>
+                            <span th:text="${currentBoardType}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- bedCount input -->
+                            <label for="bedCount">Number of Beds</label>
+                            <div class="ui input">
+                                <input type="number"
+                                       name="bedCount"
+                                       id="bedCount"
+                                       placeholder="number of beds"
+                                       step="1"
+                                       th:value="${bedCount}"
+                                       pattern="[0-9]*">
+                            </div>
+                            <span>Current Beds: </span>
+                            <span th:text="${currentBeds}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Price input -->
+                            <label for="price">Maximum Price per night</label>
+                            <div class="ui input">
+                                <input type="number"
+                                       name="price"
+                                       id="price"
+                                       placeholder="max price per night"
+                                       step="any"
+                                       th:value="${price}">
+                            </div>
+                            <span>Current max. Price: </span>
+                            <span th:text="${currentPrice}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- roomType Input -->
+                            <div th:each="type: ${allTypes}">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="types" th:value="${type}">
+                                    <label th:for="${type}" th:text="${type}"></label>
+                                </div>
+                            </div>
+                            <span>Current Types: </span>
+                            <span th:text="${currentTypes}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- equipment Input -->
+                            <div th:each="item: ${equipment}">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="equipment" th:value="${item.getId()}">
+                                    <label th:for="${item.getId()}" th:text="${item.getName()}"></label>
+                                </div>
+                            </div>
+                            <span>Current Equipment: </span>
+                            <span th:text="${currentEquipment}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" class="ui button">
+                                <i class="fa fa-arrow-right">Submit</i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </aside>
+
+        <div class="room-catalog">
+            <h1>Room Catalogue</h1>
+
+            <form th:action="@{/resetFilters}" method="post">
+                <button  type="submit" class="ui button">
+                    <i class="fa fa-arrow-right">Reset Filters</i>
+                </button>
+            </form>
+            <!-- ERROR HANDLING -->
+            <div class="show-error" th:if="${errorMessage != null}">
+                <p><span th:text="${errorMessage}"></span></p>
+            </div>
+            <div class="show-dates" th:if="${startDate != null}">
+                <p>Selected Dates: <span th:text="${'Startdate: ' + startDate + ', Enddate: ' + endDate}">not set</span>
+                </p>
+            </div>
+            <br>
+
+            <!-- ROOM CARDS -->
+            <div class="room-card" th:each="room : ${catalog}">
+                <div class="room-details">
+                    <div class="room-name">
+                        <a th:href="@{/room/{id}(id=${room.id})}" th:text="${room.name}">Room name 1</a>
+                    </div>
+                    <div class="room-info">
+                        <div>Bed count: <span th:text="${room.bedCount}">1</span></div>
+                        <p class="room-price">Price: <span th:text="${room.price}"></span>€ per night</p>
+                        <!-- <p class="room-type">Zimmertyp: <span th:text="${room.type}"></span></p> -->
+                        <p th:text="'Total Price: ' + ${room.totalPrice} + ' €'" ></p>
+                    </div>
+                </div>
+                <div class="room-image">
+                    <img class="thumbnail" th:if="${room.image != null}" th:src="@{/resources/img/rooms/{image}.jpg(image=${room.image})}"
+                         src="../static/resources/img/rooms/sdbr.jpg"/>
+                </div>
+                <form method="post" th:action="@{/addRoom}">
+                    <div class="room-to-cart">
+                        <input type="hidden" name="pid" value="0" th:value="${room.getId()}"/>
+                        <button th:if="${room.getInCart() == false}">Add room to cart</button>
+                        <div th:if="${room.getInCart() == true}">
+                            <p style="font-weight: bold;">This room is already in the cart.</p>
+                        </div>
+                    </div>
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+

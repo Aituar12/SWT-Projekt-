@@ -1,0 +1,57 @@
+= Protocol Group 13
+
+Meeting on 06.11.2023
+
+Place:      Ort des Treffens +
+Start:   08:30 Uhr +
+End:     09:00 Uhr
+
+__Protocol writer:__ Celina Stransky
+
+*Next Meeting:* +
+13.11.2023, 08:00 Uhr, SLUB
+
+__Participants:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- *Meera*
+
+- Aituar
+- Adrian
+- Bastian (SCRUM Master)
+- Oliver
+- Celina
+- Antonia
+- Kevin
+
+not present: Florian
+
+== Notes
+* Cleaning:
+** should manager be able to change it having assigned it?
+*** not necessary
+** Also should staff be able to see, what room they were assigned to?
+*** YES
+
+* Catalog:
+** Should all rooms be displayed and which equipment there are ?
+*** equipment shall be shown in the detail page
+*** all rooms (fitting the criteria) are to be shown in the catalog
+*** if no categories selected: show all room
+** how many rooms?
+*** about 10 (4-4-2)
+
+* Presentation for next week:
+** present results of analysis and design phase
+** present working prototype
+
+* Design phase:
+** still model features like the terminal/ vacRequest
+
+== Current
+everyone started their prototype, design has not started, since we need the prototypes to do the package diagrams
+
+== Planning of the next Sprints
+This week: finish prototype, and complete devDoc
+This week: possible merge in the next days, so we can start with putting it all together
+Plan: at end of week we want to have 1! prototype that links to all other sites

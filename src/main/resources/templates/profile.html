@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout.html}">
+    <head>
+        <meta charset="utf-8">
+		<link rel="stylesheet" th:href="@{/resources/css/style.css}">
+        <title>Profile</title>
+    </head>
+    <body>
+    <header></header>
+    <section layout:fragment="content">
+        <h1 th:text="#{login.profile}">Your Profile</h1>
+        <p sec:authorize="hasRole('REGISTERED_USER')" th:text="#{login.confirmation}">You are logged in.</p>
+		<p sec:authorize="hasRole('STAFF')" th:text="#{login.staff_confirmation}">You are logged in.</p>
+        <p sec:authorize="hasRole('MANAGER')"th:text="#{login.manager_confirmation}">Good day Manager, you are logged in.</p>
+
+        <form sec:authorize="isAuthenticated()" method="get" th:action="@{/bookings}">
+			<button  class="navigate button">My Bookings</button>
+		</form>
+		<form sec:authorize="hasRole('MANAGER')" method="get" th:action="@{/management/statistics}">
+			<button  class="navigate button">Statistics</button>
+		</form>
+		<form sec:authorize="hasAnyRole('STAFF','MANAGER')" method="get" th:action="@{/reservationOverview}">
+			<button  class="navigate button">Reservation Overview</button>
+		</form>
+		<form sec:authorize="hasRole('MANAGER')" method="get" th:action="@{/management/cleaning}">
+			<button  class="navigate button">Cleaning Schedule</button>
+		</form>
+		<form sec:authorize="hasRole('MANAGER')" method="get" th:action="@{/management/priceChanges}">
+			<button  class="navigate button">Price Changes</button>
+		</form>
+    </section>
+    </body>
+
+</html>

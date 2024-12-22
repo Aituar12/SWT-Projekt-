@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/resources/css/style.css">
+    <title>Cleaning Schedule</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <section layout:fragment="content">
+    <h1>Cleaning Schedule</h1>
+    <h2> daily routine</h2>
+    <table class="ui celled table">
+        <thread>
+            <tr>
+                <th>Room number</th>
+                <th>Room type</th>
+                <th>Assigned Staff</th>
+            </tr>
+        </thread>
+        <tbody>
+            <tr th:each="room: ${activeBookedRooms}" th:name="room">
+                <td th:text="${room.getRoomNumber()}" th:name="roomNumber"> 01 </td>
+                <td th:text="${room.getRoomType()}" th:name="roomType"> Single </td>
+                <td>
+                    <div class="row">
+                    <form action="#" class="ui form" th:action="@{/management/cleaning/addStaffToRoom}" th:method="post">
+                        <input type="hidden" name="roomId" th:value="${room.getId()}" />
+                        <div class="col">
+                            <label>
+                                <select class="ui selection dropdown multi-select"
+                                        multiple="multiple"
+                                        th:id="${room.getId()}"
+                                        th:name="selectedStaffMembers">
+                                    <option value="">Staff</option>
+                                    <option th:each="staffMember: ${cleaningStaff}"
+                                            th:value="${staffMember.getUserAccount().getId()}"
+                                            th:text="${staffMember.getUserAccount().getUsername()}">
+                                        <input type="hidden" name="selectedStaffMembers" th:value="${staffMember.getUserAccount().getId()}" />
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col submit">
+                            <button class="ui circular button" type="submit">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h2> Final cleanings</h2>
+    <table class="ui celled table">
+        <thread>
+            <tr>
+                <th>Room number</th>
+                <th>Room type</th>
+                <th>Assigned Staff</th>
+            </tr>
+        </thread>
+        <tbody>
+        <tr th:each="room: ${lastDayBookedRooms}" th:name="room">
+            <td th:text="${room.getRoomNumber()}" th:name="roomNumber"> 01 </td>
+            <td th:text="${room.getRoomType()}" th:name="roomType"> Single </td>
+            <td>
+                <div class="row">
+                    <form action="#" class="ui form" th:action="@{/management/cleaning/addStaffToRoom}" th:method="post">
+                        <input type="hidden" name="roomId" th:value="${room.getId()}" />
+                        <div class="col">
+                            <label>
+                                <select class="ui selection dropdown multi-select"
+                                        th:id="'multi-select' + ${room.getId()}"
+                                        name="selectedStaffMembers"
+                                        multiple>
+                                    <option value="">Staff</option>
+                                    <option th:each="staffMember: ${cleaningStaff}"
+                                            th:value="${staffMember.getUserAccount().getId()}"
+                                            th:text="${staffMember.getUserAccount().getUsername()}">
+                                        <input type="hidden" name="selectedStaffMembers" th:value="${staffMember.getUserAccount().getId()}" />
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col submit">
+                            <button class="ui circular button" type="submit">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        <script>
+            $(document).ready(function() {
+                $(".multi-select").dropdown({
+                    maxSelections:2
+                });
+                console.log("check");
+            });
+        </script>
+    </section>
+
+</body>
+</html>

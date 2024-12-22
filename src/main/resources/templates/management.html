@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <title th:text="#{welcome.title}">Welcome management!</title>
+</head>
+<body>
+<header>
+</header>
+<section layout:fragment="content">
+    <h1 th:text="#{welcome.title}"> Welcome Management!</h1>
+<form method="get" th:action="@{/management/statistics}">
+    <button  class="navigate button">Statistics
+    </button>
+</form>
+<form method="get" th:action="@{/management/statistics}">
+    <button  class="navigate button">Booked Rooms
+    </button>
+</form>
+<form method="get" th:action="@{/management/cleaning}">
+    <button  class="navigate button">Cleaning Schedule
+    </button>
+</form>
+<form method="get" th:action="@{/management/priceChanges}">
+    <button  class="navigate button">Price Changes
+    </button>
+</form>
+</section>
+</body>
+</html>

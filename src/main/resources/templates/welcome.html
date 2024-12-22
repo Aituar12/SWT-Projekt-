@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <title th:text="#{welcome.title}">Welcome!</title>
+</head>
+<body>
+<header></header>
+<section layout:fragment="content">
+    <h1 th:text="#{welcome.title}">Welcome!</h1>
+
+    <!--<p th:text="#{welcome.text}"></p>-->
+    <div class="set-dates">
+        <form method="post" th:action="@{/filterCatalog}">
+            <table class="ui basic table">
+                <thead>
+                <tr>
+                    <th>Filter</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <!-- start date input -->
+                        <label for="startDate">From: </label>
+                        <input type="date" name="startDate" id="startDate" th:value="${startDate}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- end date input -->
+                        <label for="endDate">To: </label>
+                        <input type="date" name="endDate" id="endDate" th:value="${endDate}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- person input -->
+                        <label for="personCount">Number of Persons: </label>
+                        <input type="number"
+                               name="personCount"
+                               id="personCount"
+                               placeholder="number of persons"
+                               step="1"
+                               th:value="${personCount}"
+                               pattern="[0-9]*">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- board type input -->
+                        <label for="boardType">Board Type: </label><br>
+                        <form>
+                            <input type="radio" name="boardType" id="boardType" th:value="BREAKFAST" checked> Breakfast<br>
+                            <input type="radio" name="boardType" id="boardType" th:value="HALFBOARD"> Half Board<br>
+                            <input type="radio" name="boardType" id="boardType" th:value="FULLBOARD"> Full Board<br>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- bedCount input -->
+                        <label for="bedCount">Number of Beds: </label>
+                        <input type="number"
+                               name="bedCount"
+                               id="bedCount"
+                               placeholder="number of beds"
+                               step="1"
+                               th:value="${bedCount}"
+                               pattern="[0-9]*">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- roomType Input -->
+                        <div th:each="type: ${allTypes}">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="types" th:value="${type}">
+                                <label th:for="${type}" th:text="${type}"></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="ui button">
+                            <i class="fa fa-arrow-right">Submit</i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </form>
+    </div>
+
+</section>
+</body>
+</html>

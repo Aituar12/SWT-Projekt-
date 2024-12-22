@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Room Details</title>
+    </head>
+    <body>
+    <header></header>
+    <section layout:fragment="content">
+        <h1>Room details</h1>
+        <p>Bed count: <span th:text="${room.bedCount}">1</span></p>
+        <p>Room size: <span th:text="${room.area}"></span>m²</p>
+        <p>Amenities: <span th:text="${room.equipment}"></span></p>
+        <p>Price: <span th:text="${room.price}">2</span>€ per night</p>
+      <th:block th:if="${room.class.simpleName == 'Suite'}">
+            <h2>Rooms in this suite:</h2>
+                <div class="room-list" th:each="suiteRoom : ${room.rooms}">
+                    <h3 th:text="${suiteRoom.name}"></h3>
+                </div>
+        </th:block>
+    </section>
+    </body>
+</html>

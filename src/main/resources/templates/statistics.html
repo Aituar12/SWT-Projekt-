@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/resources/css/style.css">
+    <title>Statistics</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <h1>Transactions</h1>
+    <h2>Since Yesterday</h2>
+    <table class="ui celled table"> 
+        <thead>
+        <tr>
+            <th>Expenses</th>
+            <th>Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <table class="ui celled table"> 
+                    <thead>
+                    <tr>
+                        <th>amount</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterStat : ${expensesYesterday}">
+                        <td th:text="${item.amount}"></td>
+                        <td th:text="${item.date}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table class="ui celled table"> 
+                    <thead>
+                    <tr>
+                        <th>amount</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterStat : ${revenueYesterday}">
+                        <td th:text="${item.amount}"></td>
+                        <td th:text="${item.date}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Total Sum:</span>
+                <span th:text="${totalExpensesYesterday}"></span>
+            </td>
+            <td>
+                <span>Total Sum:</span>
+                <span th:text="${totalRevenueYesterday}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Since Last Week</h2>
+    <table class="ui celled table"> 
+        <thead>
+        <tr>
+            <th>Expenses</th>
+            <th>Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <table class="ui celled table"> 
+                    <thead>
+                    <tr>
+                        <th>amount</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterStat : ${expensesLastWeek}">
+                        <td th:text="${item.amount}"></td>
+                        <td th:text="${item.date}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table class="ui celled table"> 
+                    <thead>
+                    <tr>
+                        <th>amount</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterStat : ${revenueLastWeek}">
+                        <td th:text="${item.amount}"></td>
+                        <td th:text="${item.date}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Total Sum:</span>
+                <span th:text="${totalExpensesLastWeek}"></span>
+            </td>
+            <td>
+                <span>Total Sum:</span>
+                <span th:text="${totalRevenueLastWeek}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Since Last Month</h2>
+    <table class="ui celled table"> 
+        <thead>
+        <tr>
+            <th>Expenses</th>
+            <th>Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <table class="ui celled table"> 
+                    <thead>
+                    <tr>
+                        <th>amount</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterStat : ${expensesLastMonth}">
+                        <td th:text="${item.amount}"></td>
+                        <td th:text="${item.date}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table class="ui celled table"> 
+                    <thead>
+                    <tr>
+                        <th>amount</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterStat : ${revenueLastMonth}">
+                        <td th:text="${item.amount}"></td>
+                        <td th:text="${item.date}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Total Sum:</span>
+                <span th:text="${totalExpensesLastMonth}"></span>
+            </td>
+            <td>
+                <span>Total Sum:</span>
+                <span th:text="${totalRevenueLastMonth}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+</body>
+
+</html>

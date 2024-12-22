@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <title th:text="#{registration.title}">Registration</title>
+</head>
+    <body>
+        <header></header>
+        <section layout:fragment="content">
+        <form action="#" method="post" role="form" class="ui form" id="form" th:action="@{/registration}" th:object="${registrationForm}">
+
+            <h2 th:text="#{registration.userinformation}">User Information</h2>
+            <label for="name">Name</label>
+            <input id="name" name="name" th:field="*{name}" type="text" required="required" autofocus/><br/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+           
+            <label for="password" th:text="#{registration.password}">Password</label>
+            <input id="password" name="password" th:field="*{password}" type="password" required="required"/><br/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+
+            <h2 th:text="#{registration.creditCardInformation}">Credit Card Information</h2>
+            <label for="cardholderName" th:text="#{registration.cardholder}">Cardholder Name</label>
+            <input type="text" id="cardholderName" name="cardholderName" th:field="*{cardholderName}" required/><br/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('cardholderName')}" th:errors="*{cardholderName}">CName Error</div>
+
+            <label for="creditCardNumber" th:text="#{registration.creditCardNumber}">Credit Card Number</label>
+            <input id="creditCardNumber" name="creditCardNumber" type="text" th:field="*{creditCardNumber}" required="required"/><br/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('creditCardNumber')}" th:errors="*{creditCardNumber}">cCNumber Error</div>
+
+            <label for="expirationDate" th:text="#{registration.expirationDate}">From:</label>
+            <input type="date" name="expirationDate" id="expirationDate" th:value="${expirationDate}">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('expirationDate')}" th:errors="*{expirationDate}">expirationDate Error</div>
+            <input type="submit" class="login button" value="Register"/><br/>
+
+            <a th:href="@{/}" th:text="#{welcome.homepage}">Homepage</a>
+        </form>
+        </section>
+    </body>
+</html>

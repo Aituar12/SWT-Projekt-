@@ -1,0 +1,55 @@
+= Protocol Gruppe 13
+
+Meeting on 30.10.2023
+
+Ort:      SLUB Room 0.42 +
+Beginn:   08:00 Uhr +
+Ende:     9:00 Uhr
+
+__Protocol written by:__ Celina Stransky
+
+*Next Meeting:* +
+06.11.2023, 08:30 , Slub
+
+__Participants:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+All Participants were prensent locally
+
+== Notes
+
+* Questions : Can we user Kanban instead of Github Issues - Meera will get back to us
+* Remark: everyone has to sign in to JExam and register for the exam!!
+* Remark: we agreed to write the developer documentation in english, as well as the comments in the code, so that meera will be able to give her opinion
+
+
+// // See http://asciidoctor.org/docs/user-manual/=tables
+// [option="headers"]
+// |===
+// |Issue |Aufgabe |Status |Bemerkung
+// |…     |…       |…      |…
+// |===
+
+
+== Current Status
+videoshop extensions are finished and the Pflichtenheft was completed
+
+== Planning of the next weeks
+Next Tasks: 
+
+* Everyone group chooses one part oft the functional requirements and starts a Prototype with Spring boot
+** note : when dependencies with other groups would be needed, we agreed to just hardcode the missing parts
+** every group in their own branch
+*** Authentification - Oli and Adrian
+*** Booking - Florian and Kevin
+*** Registration - Celina and Antonia
+*** Price Calculation - Bastian and Aituar
+* Developer Documentation : everyone together
+** Bastian makes Cards on the Kanban, then everyone assigns themself
+
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+// [option="headers"]
+// |===
+// |Issue |Titel |Beschreibung |Verantwortlicher |Status
+// |…     |…     |…            |…                |…
+// |===

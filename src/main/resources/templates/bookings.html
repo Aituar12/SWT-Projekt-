@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <title>Bookings</title>
+</head>
+<body>
+    <header></header>
+    <section layout:fragment="content">
+        <h1>Active Reservations:</h1>
+
+
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <td style="border: 1px solid black;">Reservation Number</td>
+                <td style="border: 1px solid black;">Orders</td>
+                <td style="border: 1px solid black;">Total Price / Pay In Advance</td>
+                <td style="border: 1px solid black;">Cancellation</td>
+            </tr>
+            </thead>
+            <tr th:each="reservation : ${reservationList}">
+                <td style="border: 1px solid black;" th:text="'Reservation-'+${reservation.getReservationNumber()}"></td>
+                <td style="border: 1px solid black;">
+                    <table style="border-collapse: collapse;">
+                        <tr>
+                            <td style="border: 1px solid black;">Roomtype</td>
+                            <td style="border: 1px solid black;">Price per night</td>
+                            <td style="border: 1px solid black;">Start Date</td>
+                            <td style="border: 1px solid black;">End Date</td>
+                            <td style="border: 1px solid black;">Number Of Nights</td>
+                            <td style="border: 1px solid black;">Payment Status</td>
+                            <td style="border: 1px solid black;">Total Room Price</td>
+
+                        </tr>
+                        <div th:each="room : ${reservation.getRoomSet()}">
+                            <tr>
+                                <td th:text="${room.getName()}" style="border: 1px solid black;">101 Doublebed</td>
+                                <td th:text="${room.getPrice}" style="border: 1px solid black;">50 EURO</td>
+                                <td th:text="${reservation.getStartDate()}">Start Date</td>
+                                <td th:text="${reservation.getEndDate()}">End Date</td>
+                                <td th:text="${reservation.getDiffDays()}">4 Nights</td>
+                                <td>
+                                    <div th:text="${reservation.getPaymentStatus()}">PaymentStatus</div>
+                                </td>
+                                <td th:text="${room.getPrice.multiply(reservation.getDiffDays())}" style="border: 1px solid black;">Test 50 eur</td>
+                            </tr>
+                        </div>
+
+                    </table>
+                </td>
+
+
+                <td style="border: 1px solid black;">
+                    <div th:text="${reservation.getPrice()}">Total Reservation Price</div>
+                    <form method="post" th:action="@{/payInAdvance}">
+                        <input type="hidden" name="payInAdvance" th:value="${reservation.getOrderId()}" />
+                        <div class="button-payInAdvance">
+                            <div th:if="${reservation.getPaymentStatus().toString()=='OPEN'}">
+                                <button type="submit" th:text="'Pay In Advance'">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div th:if="${reservation.getPaymentStatus().toString()!='OPEN'}">Payment Successfully Completed</div>
+                </td>
+                <td style="border: 1px solid black;" >
+                    <form method="post" th:action="@{/cancel}">
+                        <input type="hidden" name="orderId" th:value="${reservation.getOrderId()}" />
+                        <div class="button-reservation">
+                            <div th:if="${reservation.getTimeStatus().toString()=='PENDING'}">
+                                <button type="submit" th:text="'Cancel now! Fee 8%: ' + ${reservation.getPrice().multiply(0.08)}">
+                                </button>
+                            </div>
+                            <div th:if="${reservation.getTimeStatus().toString()!='PENDING'}"><p style="font-weight: bold;">Cancellation Deadline Exceeded.</p></div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+    </section>
+</body>
+</html>

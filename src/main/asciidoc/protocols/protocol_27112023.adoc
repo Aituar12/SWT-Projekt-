@@ -1,0 +1,35 @@
+= Protokoll Gruppe 13
+
+Meeting on the 27.11.2023
+
+Location:      Zoom +
+Start:   08:30  +
+End:     08:44 
+
+__Protocol Writer:__ Antonia 
+
+*Nächstes Treffen:* +
+04.12.2023, 08:30 o'Clock, Slub
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Celina
+- Bastian
+- Kevin
+- Florian
+- Aituar
+- Oliver
+- Antonia
+
+== Notes
+/
+
+== Current
+- Meera has no problems with the current state of project, says it looks fine
+- sonarqube reduced to 40% after last merge -> fix it until next week
+- DevDoc needs updating -> will be done after the basic functionality is finished to update in one go 
+
+== Planning of next sprints
+- finishing of basic functionality until next sprint
+      

@@ -1,0 +1,64 @@
+= Protocol Group 13
+
+Meeting on 04.12.2023
+
+Place:   SLUB Room 042 +
+Start:   08:30 Uhr +
+(Planned on starting 8:30 real start at 8:40)
+End:     09:00 Uhr
+
+__Protocol writer:__ Celina Stransky
+
+*Next Meeting:* +
+11.12.2023, 8:30 SLUB 0.42
+
+__Participants:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- *Meera* (Tutor, Customer, late)
+
+- Celina
+- Kevin
+- Antonia
+- Aituar (late)
+- Bastian (SCRUM Master) (late)
+- Oliver (late)
+- Florian (late)
+
+not present: Adrian (overslept)
+
+== Notes
+
+* we implemented the filtering to the catalog
+* all issues from the sonarqube have been resolved
+* test coverage is at 56%
+
+== Current
+
+* Questions:
+** How do we deal with Money amounts?
+*** take as string from html, put string in database, convert string to numeric value
+** Integration Tests?
+*** We can start them to make sonarqube coverage higher by already starting with integration tests
+** Code coverage?
+*** overall coverage counts for the quality gate, not the line coverage if we are dealing with them in the backend
+** What can be understood by expenses:
+*** salaries, electricity (can be static, does not have to be dynamic), food expenses (this should be dynamic)
+*** salaries on fixed date: e.g: manger clicks refresh button : new expenses are added based on the current date
+** credit card:
+*** sales-point wants "real" sales-point credit card -> idea: when paying order customer credit info (currently as string) is transformed to sales-point credit card, just for the ordering process
+*** oli will update the credit card to have more attributes than currently (add expiration date etc.)
+
+* Task distribution is done via Trello:
+** https://trello.com/b/8H2GYu28/swp
+
+
+== Planning of the next Sprints
+
+* more unittests so that test coverage is at 60%
+* make catalog site pretty
+* add more rooms with differences to better test the filtering logic
+* add small description to transaction entries
+* add "profit" text under Transactions
+* add overall amount on money the manager has at available, which is updated dynamically based on revenues and expenses that are made in the hotel (CAN-CRITERIA, not mandatory)
+

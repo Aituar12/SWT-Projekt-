@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <title>Cart</title>
+    </head>
+    <body>
+    <header></header>
+    <section layout:fragment="content">
+
+    <h1>Your Cart</h1>
+    <div class="cart-table">
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <td style="border: 1px solid black;">Room Type</td>
+                <td style="border: 1px solid black;">Price Per Night</td>
+                <td style="border: 1px solid black;">Start Date</td>
+                <td style="border: 1px solid black;">End Date</td>
+                <td style="border: 1px solid black;">Board</td>
+                <td style="border: 1px solid black;">Number of Persons</td>
+                <td style="border: 1px solid black;">Total Room Price</td>
+                <td style="border: 1px solid black;">Remove Room From Cart</td>
+            </tr>
+            </thead>
+            <tr th:each="item : ${castedCart}">
+                <td style="border: 1px solid black;" th:text="${item.name}">-</td>
+                <td style="border: 1px solid black;" th:text="${item.getPrice()}">-</td>
+                <td style="border: 1px solid black;" th:text="${startDate}">-</td>
+                <td style="border: 1px solid black;" th:text="${endDate}">-</td>
+                <td style="border: 1px solid black;" th:text="${boardType}">-</td>
+                <td style="border: 1px solid black;" th:text="${personCount}">-</td>
+                <td style="border: 1px solid black;" th:text="${item.getPrice().multiply(diffDays)}">-</td>
+                <td style="border: 1px solid black;">
+                    <form method="post" th:action="@{/removeItem}">
+                        <input type="hidden" name="itemId" th:value="${item.getId()}" />
+                        <button type="submit" th:text="'Remove'">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+        <a class="item" sec:authorize="!isAuthenticated()" th:href="@{/custom_login}">To continue, please log in.</a>
+
+    <form sec:authorize="isAuthenticated()" method="post" th:action="@{/checkout}">
+        <!-- Eingabefeld für den Namen
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput" name="name" required><br><br>
+
+         Eingabefeld für die Kreditkartennummer
+        <label for="creditCardInput">Creditcardnumber:</label>
+        <input type="text" id="creditCardInput" name="creditCard" required><br><br>
+        -->
+        <div class="booking-button"  th:if="${!cart.isEmpty()}">
+        <button type="submit" class="navigate button">Book your order</button>
+        </div>
+        <div th:if="${cart.isEmpty()}"><p style="font-weight: bold;">Add a room to cart to finish a booking.</p></div>
+    </form>
+    </section>
+    </body>
+</html>

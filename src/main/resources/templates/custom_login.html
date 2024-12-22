@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+    <head>
+        <meta charset="utf-8">
+		<link rel="stylesheet" th:href="@{/resources/css/style.css}">
+        <title>Login</title>
+    </head>
+    <body>  
+        <section layout:fragment="content">
+            <form role="form" class="ui form" id="form" th:action="@{/custom_login}" method="post">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger" role="alert">Invalid Username or Password</div>
+                </div>
+                <label for="username" th:text="#{login.username}">Username:</label>
+                <input type="text" id="username" name="username" required autofocus>
+                <br>
+                <label for="password" th:text="#{registration.password}">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <a th:href="@{/forgot_password}" th:text="#{login.forgot_password}">Forgot password?</a>
+                <br>
+                <input type="submit" class="login button" value="Login">
+            </form>
+            <a class="item" th:text="#{login.register}"th:href="@{/registration}"></a><br/>
+        </section>
+ 
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+<nav th:fragment="navigation">
+  <div class="ui attached stackable menu">
+      <div class="left menu">
+          <a class="item" th:href="@{/}">
+              <button type="submit" class="ui button">Home</button>
+          </a>
+          <a class="item" th:href="@{/catalog}">
+              <button type="submit" class="ui button">Catalogue</button>
+          </a>
+      </div>
+      <div class="right menu">
+          <a class="item" th:href="@{/cart}">
+              <button type="button" class="ui button">Cart</button>
+          </a>
+          <a class="item" sec:authorize="isAuthenticated()" th:href="@{/bookings}">
+              <button type="submit" class="ui button">Bookings</button>
+          </a>
+          <a class="item" sec:authorize="isAuthenticated()" th:href="@{/profile}">
+              <button type="submit" class="ui button">Profile</button>
+          </a>
+          <a class="item" sec:authorize="!isAuthenticated()" th:href="@{/registration}">
+              <button type="submit" class="ui button">Register</button>
+          </a>
+          <a class="item" sec:authorize="!isAuthenticated()" th:href="@{/custom_login}">
+              <button type="submit" class="ui button">Login</button>
+          </a>
+          <form class="item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+              <button type="submit" class="ui button">Logout</button>
+          </form>
+      </div>
+  </div>
+  <br/>
+</nav>
+</body>
+</html>

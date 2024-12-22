@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/resources/css/style.css">
+  <title>My Cleaning Schedule</title>
+</head>
+
+<body>
+<header>
+</header>
+<section layout:fragment="content">
+
+
+  <h1>Cleaning Assignments for Today</h1>
+  <h2> daily routine</h2>
+
+
+  <table class="ui celled table">
+    <thread>
+      <tr>
+        <th>Room number</th>
+        <th>Room type</th>
+      </tr>
+    </thread>
+    <tbody>
+    <tr th:each="room: ${assignedRooms}" th:name="room">
+      <td th:text="${room.getRoomNumber()}" th:value="${room.getRoomNumber()}" th:name="roomName"> 01 </td>
+      <td th:text="${room.getRoomType()}" th:name="roomType"> Single </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</section>
+</body>
